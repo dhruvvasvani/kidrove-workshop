@@ -33,16 +33,16 @@ const Enquiry = mongoose.model('Enquiry', EnquirySchema, 'enquiries');
 // In-memory fallback
 const memoryDb = [];
 
-console.log('🔌 Attempting to connect to MongoDB...');
+console.log('[DB] Attempting to connect to MongoDB...');
 mongoose.connect(MONGO_URI)
   .then(() => {
     isMongoConnected = true;
-    console.log('✅ MongoDB connected → kidrove_workshop');
+    console.log('[DB] MongoDB connected -> kidrove_workshop');
   })
   .catch((err) => {
     isMongoConnected = false;
     console.warn('\n═══════════════════════════════════════════════════════');
-    console.warn('⚠️  MongoDB unavailable — running in Memory Mode');
+    console.warn('[DB] MongoDB unavailable — running in Memory Mode');
     console.warn(`   Reason: ${err.message}`);
     console.warn('   All registrations will be stored in memory only.');
     console.warn('═══════════════════════════════════════════════════════\n');
@@ -122,7 +122,7 @@ app.post('/api/enquiry', async (req, res) => {
   // Validate
   const errors = validateEnquiry(req.body);
   if (Object.keys(errors).length > 0) {
-    console.log('❌ Validation failed:', errors);
+    console.log('[VALIDATION] Failed:', errors);
     return res.status(400).json({ success: false, errors });
   }
 
@@ -145,7 +145,7 @@ app.post('/api/enquiry', async (req, res) => {
         });
       }
       const saved = await new Enquiry(cleanData).save();
-      console.log(`✅ Saved to MongoDB: ${saved._id} — ${cleanData.name} <${cleanData.email}>`);
+      console.log(`[DB] Saved to MongoDB: ${saved._id} — ${cleanData.name} <${cleanData.email}>`);
       return res.status(201).json({
         success: true,
         message: 'Registration successful! We will contact you within 24 hours.',
@@ -167,7 +167,7 @@ app.post('/api/enquiry', async (req, res) => {
         });
       }
       memoryDb.push(doc);
-      console.log(`✅ Saved to Memory: ${doc._id} — ${cleanData.name} <${cleanData.email}>`);
+      console.log(`[DB] Saved to Memory: ${doc._id} — ${cleanData.name} <${cleanData.email}>`);
       return res.status(201).json({
         success: true,
         message: 'Registration successful! (Note: server is in demo mode — connect MongoDB for persistence)',
@@ -175,7 +175,7 @@ app.post('/api/enquiry', async (req, res) => {
       });
     }
   } catch (err) {
-    console.error('💥 Error saving enquiry:', err);
+    console.error('[ERROR] Error saving enquiry:', err);
     return res.status(500).json({ success: false, message: 'Server error. Please try again in a moment.' });
   }
 });
@@ -187,13 +187,13 @@ app.use((req, res) => {
 
 // Global error handler
 app.use((err, req, res, _next) => {
-  console.error('💥 Unhandled error:', err);
+  console.error('[ERROR] Unhandled error:', err);
   res.status(500).json({ success: false, message: 'Internal server error.' });
 });
 
 // ─── Start ────────────────────────────────────────────────────
 app.listen(PORT, () => {
-  console.log(`\n🚀 Kidrove API Server running on http://localhost:${PORT}`);
+  console.log(`\nKidrove API Server running on http://localhost:${PORT}`);
   console.log(`   POST /api/enquiry     → Register student`);
   console.log(`   GET  /api/enquiries   → List all registrations`);
   console.log(`   GET  /api/health      → Server status\n`);

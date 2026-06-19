@@ -278,7 +278,7 @@ export default function WorkshopLandingPage() {
 
       {/* ── Banner ── */}
       <div className="bg-gradient-to-r from-violet-700 via-violet-600 to-purple-600 text-white text-center py-2.5 px-4 text-sm font-medium">
-        🚀 <strong>Early Bird Open</strong> — Only <strong className="text-yellow-300">{seatsLeft} seats</strong> left for July 2026!{' '}
+        Early Bird Open — Only <strong className="text-yellow-300">{seatsLeft} seats</strong> left for July 2026!{' '}
         <button onClick={scrollToForm} className="underline font-bold hover:no-underline hover:text-yellow-300 transition-colors ml-2">
           Grab Your Seat →
         </button>
@@ -397,7 +397,7 @@ export default function WorkshopLandingPage() {
               <div className="h-2.5 bg-orange-100 rounded-full overflow-hidden">
                 <div className="h-full seat-fill rounded-full" style={{ width: `${seatsPct}%`, '--target-width': `${seatsPct}%` } as React.CSSProperties} />
               </div>
-              <p className="text-xs text-orange-600 font-semibold mt-1.5">⚡ Only {seatsLeft} seats remaining!</p>
+              <p className="text-xs text-orange-600 font-semibold mt-1.5">Only {seatsLeft} seats remaining!</p>
             </div>
 
             <div className="flex flex-wrap gap-3 pt-1">
@@ -460,7 +460,7 @@ export default function WorkshopLandingPage() {
               </div>
 
               <div className="bg-violet-50 rounded-2xl p-4 space-y-2">
-                <p className="text-xs font-bold text-violet-700 uppercase tracking-wider mb-2">✨ What's Included</p>
+                <p className="text-xs font-bold text-violet-700 uppercase tracking-wider mb-2">What's Included</p>
                 {['20 live interactive sessions','Recorded session access','Personal project portfolio','Official completion certificate','Mentor Q&A support'].map(item => (
                   <div key={item} className="flex items-center gap-2 text-sm text-gray-600">
                     <Check className="h-4 w-4 text-violet-500 flex-shrink-0" />{item}
@@ -618,7 +618,7 @@ export default function WorkshopLandingPage() {
                       <div className="w-20 h-20 bg-gradient-to-br from-emerald-100 to-green-100 rounded-full flex items-center justify-center mx-auto animate-confetti">
                         <CheckCircle className="h-10 w-10 text-emerald-600" />
                       </div>
-                      <h4 className="text-2xl font-black text-gray-900">You're Registered! 🎉</h4>
+                      <h4 className="text-2xl font-black text-gray-900">You're Registered!</h4>
                       <p className="text-gray-500 text-sm leading-relaxed">
                         Our team will contact you within <strong>24 hours</strong> to confirm your seat and share login details.
                       </p>
@@ -735,7 +735,7 @@ export default function WorkshopLandingPage() {
             className="bg-white text-violet-700 hover:bg-violet-50 px-10 py-4 rounded-2xl font-extrabold text-lg shadow-2xl hover:scale-105 active:scale-95 transition-all flex items-center gap-2 mx-auto">
             Enroll Now — ₹2,999 <ArrowRight className="h-5 w-5" />
           </button>
-          <p className="text-violet-300 text-sm">✓ Full refund within 7 days  ·  ✓ Certificate included  ·  ✓ Batch starts 15 July 2026</p>
+          <p className="text-violet-300 text-sm">Full refund within 7 days  ·  Certificate included  ·  Batch starts 15 July 2026</p>
         </div>
       </section>
 
