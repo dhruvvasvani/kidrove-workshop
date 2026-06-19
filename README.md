@@ -1,12 +1,10 @@
-# 🤖 Kidrove — AI & Robotics Summer Workshop 2026
+# Kidrove — AI & Robotics Summer Workshop 2026
 
-A full-stack workshop registration landing page built with **React + TypeScript + Tailwind CSS** (client) and **Node.js + Express + MongoDB** (server).
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
+A full-stack workshop registration landing page built with React, TypeScript, and Tailwind CSS on the frontend, and Node.js, Express, and MongoDB on the backend.
 
 ---
 
-## ✨ Tech Stack
+## Tech Stack
 
 | Layer    | Technology                              |
 |----------|-----------------------------------------|
@@ -14,93 +12,96 @@ A full-stack workshop registration landing page built with **React + TypeScript 
 | Bundler  | Vite 5                                  |
 | Icons    | Lucide React                            |
 | Backend  | Node.js, Express 4                      |
-| Database | MongoDB (Mongoose) — falls back to RAM  |
+| Database | MongoDB via Mongoose (memory fallback)  |
 | Fonts    | Google Fonts — Outfit + Inter           |
 
 ---
 
-## 🏆 Features
+## Features
 
-- **Fully responsive** — mobile-first design with sticky CTA bar
-- **TypeScript** throughout the React codebase
-- **Tailwind CSS** utility classes + custom design tokens
-- **Form validation** — client-side + server-side with clear error messages
-- **Loading states** — spinner on submit, server status pill (live/connecting/demo)
-- **Countdown timer** — live seconds countdown to workshop start
-- **Confetti** — fires on successful registration
-- **Rate limiting** — 5 req/min per IP on the API
-- **Duplicate detection** — blocks same email from registering twice
-- **Memory fallback** — server works without MongoDB (perfect for demos)
-- **SEO** — full Open Graph, Twitter Card, canonical, robots meta
+- Fully responsive, mobile-first design with sticky CTA bar
+- TypeScript throughout the React codebase
+- Tailwind CSS utility classes with custom design tokens
+- Form validation — client-side and server-side with field-level error messages
+- Loading states — spinner on submit, animated server status pill
+- Live countdown timer to workshop start date
+- Confetti animation on successful registration
+- Rate limiting — 5 requests per minute per IP
+- Duplicate email detection
+- In-memory fallback when MongoDB is unavailable
+- SEO — Open Graph, Twitter Card, canonical URL, robots meta
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
-kidrove/
-├── client/                  # Vite + React frontend
+kidrove-workshop/
+├── client/                        # Vite + React frontend
 │   ├── public/
 │   │   └── hero-illustration.png
 │   ├── src/
 │   │   ├── App.tsx
 │   │   ├── main.tsx
-│   │   ├── index.css        # Custom CSS (animations, glass, etc.)
-│   │   └── WorkshopLandingPage.tsx   # Main page component
+│   │   ├── index.css              # Custom animations, glassmorphism
+│   │   └── WorkshopLandingPage.tsx
 │   ├── index.html
 │   ├── tailwind.config.js
 │   ├── vite.config.ts
-│   ├── vercel.json          # Vercel SPA rewrite rule
+│   ├── vercel.json
 │   └── .env.example
 ├── server/
-│   ├── server.js            # Express API
+│   ├── server.js                  # Express REST API
 │   ├── .env.example
 │   └── package.json
-└── package.json             # Root workspace scripts
+├── package.json                   # Root workspace scripts
+├── .gitignore
+└── README.md
 ```
 
 ---
 
-## 🚀 Quick Start (Local Development)
+## Quick Start
 
-### 1. Clone & install
+### 1. Clone and install
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/kidrove-workshop.git
+git clone https://github.com/dhruvvasvani/kidrove-workshop.git
 cd kidrove-workshop
-
-# Install all dependencies (client + server)
 npm run install:all
 ```
 
 ### 2. Configure environment
 
 ```bash
-# Client — optional, proxy handles this in dev
+# Client (optional in dev — Vite proxy handles /api/* automatically)
 cp client/.env.example client/.env.local
 
 # Server
 cp server/.env.example server/.env
-# Edit server/.env and set MONGO_URI if you have MongoDB
+# Edit server/.env and set MONGO_URI if you have MongoDB running
 ```
 
-### 3. Run dev servers (both at once)
+### 3. Run both servers
 
 ```bash
 npm run dev
 ```
 
-This starts:
-- **Frontend** → http://localhost:5173
-- **Backend API** → http://localhost:5000
-
-> The Vite dev server proxies `/api/*` → `localhost:5000` automatically.
+- Frontend: http://localhost:5173
+- Backend API: http://localhost:5000
 
 ---
 
-## 🔧 Individual Commands
+## Commands
 
 ```bash
+# Install dependencies for both client and server
+npm run install:all
+
+# Run client + server concurrently
+npm run dev
+
 # Run only the frontend
 npm run dev:client
 
@@ -119,75 +120,62 @@ npm run start:server
 
 ---
 
-## ☁️ Deploy to Vercel (Frontend)
+## Deploy to Vercel
 
 ### Option A — Vercel CLI
 
 ```bash
-# Install Vercel CLI globally (one-time)
 npm install -g vercel
-
-# Deploy from the client directory
 cd client
-vercel
-
-# Follow prompts:
-# - Set up and deploy? Y
-# - Which scope? (your account)
-# - Link to existing project? N
-# - Project name: kidrove-workshop
-# - In which directory is your code located? ./
-# - Build command: npm run build
-# - Output directory: dist
-# - Development command: npm run dev
-
-# On next deploys, just run:
 vercel --prod
 ```
 
-### Option B — Vercel Dashboard (No CLI)
+When prompted:
+- Root directory: `./`
+- Build command: `npm run build`
+- Output directory: `dist`
 
-1. Push this repo to **GitHub**
-2. Go to [vercel.com](https://vercel.com) → **New Project**
-3. Import your GitHub repository
-4. Set **Root Directory** to `client`
-5. Framework: **Vite** (auto-detected)
-6. Add environment variable: `VITE_API_URL` = your backend URL
-7. Click **Deploy** ✅
+### Option B — Vercel Dashboard
+
+1. Push this repo to GitHub
+2. Go to vercel.com and click New Project
+3. Import `dhruvvasvani/kidrove-workshop`
+4. Set Root Directory to `client`
+5. Framework will be auto-detected as Vite
+6. Add environment variable: `VITE_API_URL` = your deployed backend URL
+7. Click Deploy
 
 ---
 
-## ☁️ Deploy Backend (Railway / Render)
+## Deploy Backend (Railway or Render)
 
-### Railway (recommended — free tier)
+### Railway
 
 ```bash
-# Install Railway CLI
 npm install -g @railway/cli
-
-# Login and deploy
 railway login
 cd server
 railway init
 railway up
 ```
 
-Then copy the Railway URL and set it as `VITE_API_URL` in Vercel.
+Copy the deployed URL and set it as `VITE_API_URL` in Vercel.
 
 ### Render
 
-1. Go to [render.com](https://render.com) → **New Web Service**
-2. Connect your repo, set **Root Directory** to `server`
+1. Go to render.com and create a new Web Service
+2. Connect your repository, set Root Directory to `server`
 3. Build command: `npm install`
 4. Start command: `node server.js`
-5. Add env vars: `MONGO_URI`, `FRONTEND_URL`
+5. Add environment variables: `MONGO_URI`, `FRONTEND_URL`, `PORT`
 
 ---
 
-## 🔌 API Reference
+## API Reference
 
-### `GET /api/health`
-Returns server status and database mode.
+### GET /api/health
+
+Returns server and database status.
 
 ```json
 {
@@ -197,10 +185,11 @@ Returns server status and database mode.
 }
 ```
 
-### `POST /api/enquiry`
+### POST /api/enquiry
+
 Register a student for the workshop.
 
-**Request body:**
+Request body:
 ```json
 {
   "name": "Rahul Sharma",
@@ -209,7 +198,7 @@ Register a student for the workshop.
 }
 ```
 
-**Success (201):**
+Success response (201):
 ```json
 {
   "success": true,
@@ -218,7 +207,7 @@ Register a student for the workshop.
 }
 ```
 
-**Validation error (400):**
+Validation error (400):
 ```json
 {
   "success": false,
@@ -226,28 +215,29 @@ Register a student for the workshop.
 }
 ```
 
-### `GET /api/enquiries`
-List all registrations (admin/debug use).
+### GET /api/enquiries
+
+Returns all registrations. Intended for admin or debugging use.
 
 ---
 
-## 📋 Evaluation Criteria Coverage
+## Evaluation Criteria
 
-| Criteria | Coverage |
+| Criteria | Implementation |
 |---|---|
-| **UI Design & Responsiveness (25%)** | Mobile-first, glassmorphism, animations, sticky CTA, countdown, hero illustration |
-| **React Component Structure (20%)** | Custom hooks (`useCountdown`, `useReveal`), reusable `Field`, `CountUp` components, clean separation of data/logic/UI |
-| **Code Quality & Readability (20%)** | TypeScript types, compact data-driven rendering, no duplication, clear naming |
-| **API Implementation (20%)** | REST API with validation, rate limiting, duplicate detection, MongoDB + memory fallback, proper HTTP status codes |
-| **Attention to Detail (15%)** | SEO meta, OG tags, confetti on success, server status pill, seat progress bar, FAQ accordion |
-| **Bonus: TypeScript** ✅ | Full TSX codebase |
-| **Bonus: Tailwind CSS** ✅ | Tailwind v3 + custom design tokens |
-| **Bonus: Form validation** ✅ | Client + server side with field-level errors |
-| **Bonus: Loading states** ✅ | Spinner, disabled button, server status indicator |
-| **Bonus: Vercel deploy** ✅ | `vercel.json` included, deploy steps above |
+| UI Design & Responsiveness (25%) | Mobile-first layout, glassmorphism, animations, countdown, hero illustration, sticky CTA |
+| React Component Structure (20%) | Custom hooks (useCountdown, useReveal), reusable Field and CountUp components, data-driven rendering |
+| Code Quality & Readability (20%) | TypeScript types, compact logic, no duplication, consistent naming conventions |
+| API Implementation (20%) | REST endpoints with validation, rate limiting, duplicate detection, MongoDB with memory fallback, correct HTTP status codes |
+| Attention to Detail (15%) | SEO meta, OG tags, confetti on success, server status pill, seat progress bar, FAQ accordion |
+| Bonus — TypeScript | Full TSX codebase |
+| Bonus — Tailwind CSS | Tailwind v3 with custom design tokens and animations |
+| Bonus — Form validation | Client-side and server-side with field-level error display |
+| Bonus — Loading states | Submit spinner, disabled state, server connectivity indicator |
+| Bonus — Vercel deploy | vercel.json included with SPA rewrite rule |
 
 ---
 
-## 📝 License
+## License
 
-MIT — feel free to use and adapt.
+MIT
