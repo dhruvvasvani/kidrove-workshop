@@ -152,7 +152,7 @@ export default function DynamicForm({ workshop }: { workshop: Workshop }) {
       {workshop.schemaFields.map(field => (
         <Field
           key={field.name}
-          id={`${workshop.id}-${field.name}`}
+          id={`${workshop.id || workshop._id}-${field.name}`}
           label={field.label}
           type={field.type === 'number' ? 'text' : field.type === 'email' ? 'email' : 'text'}
           name={field.name}

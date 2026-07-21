@@ -151,10 +151,28 @@ export default function WorkshopLandingPage() {
         if (result.success && result.data.length > 0) {
           setWorkshops(result.data);
           setSelectedWorkshopId(result.data[0].id || result.data[0]._id);
+          return;
         }
       } catch (err) {
         console.error('Failed to fetch workshops', err);
       }
+      // Fallback data for demo mode or when backend is unavailable
+      const fallbackWorkshop: Workshop = {
+        id: 'demo-1',
+        title: 'AI & Robotics Summer Workshop 2026',
+        description: 'Learn the fundamentals of AI and build your first robot!',
+        price: 2999,
+        dates: 'July 15 - July 20, 2026',
+        capacity: 20,
+        schemaFields: [
+          { name: 'name', type: 'string', label: 'Student Full Name', required: true },
+          { name: 'email', type: 'email', label: 'Parent Email', required: true },
+          { name: 'phone', type: 'string', label: 'Phone Number', required: true },
+          { name: 'age', type: 'number', label: 'Student Age', required: true }
+        ]
+      };
+      setWorkshops([fallbackWorkshop]);
+      setSelectedWorkshopId(fallbackWorkshop.id);
     };
     fetchWorkshops();
   }, []);
