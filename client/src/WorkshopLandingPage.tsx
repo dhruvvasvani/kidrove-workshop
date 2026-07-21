@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
-  Bot, User, Mail, PhoneCall, CheckCircle, ChevronDown, ArrowRight,
+  Bot, User, ChevronDown, ArrowRight,
   Calendar, Clock, Laptop, Loader2, Lock, Star, Zap, Shield, Globe,
   BookOpen, Award, Code2, Cpu, BrainCircuit, Rocket, Sparkles,
   CreditCard, Menu, X, Play, Trophy, Users, MessageSquare, Heart,
