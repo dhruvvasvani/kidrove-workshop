@@ -10,7 +10,7 @@ import {
 import { Workshop } from './types';
 import DynamicForm from './components/DynamicForm';
 
-const API_BASE = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? '' : 'https://kidrove-workshop.onrender.com');
+const API_BASE = import.meta.env.VITE_API_URL ?? '';
 
 // ─── Types ─────────────────────────────────────────────────────────────────
 interface TimeLeft  { days: number; hours: number; minutes: number; seconds: number }

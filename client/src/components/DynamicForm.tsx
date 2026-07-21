@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { Workshop, EnquiryResponse } from '../types';
 import { Loader2, ArrowRight, Lock, CheckCircle, Check, X, User, Mail, PhoneCall, Type, Hash } from 'lucide-react';
 
-const API_BASE = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? '' : 'https://kidrove-workshop.onrender.com');
+const API_BASE = import.meta.env.VITE_API_URL ?? '';
 
 // Reusable Field Component keeping exact original styling
 function Field({ id, label, type, name, icon, placeholder, value, error, onChange, disabled }: {
