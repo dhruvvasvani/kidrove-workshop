@@ -96,12 +96,23 @@ export default function DynamicForm({ workshop }: { workshop: Workshop }) {
 
     setSubmitting(true);
     
+    // If we are in demo mode (using the fallback workshop), just mock a successful response
+    const wId = workshop.id || workshop._id;
+    if (wId === 'demo-1') {
+      setTimeout(() => {
+        setStatus('success');
+        setFormData({});
+        setSubmitting(false);
+      }, 1500);
+      return;
+    }
+    
     try {
       const res = await fetch(`${API_BASE}/api/enquiry`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          workshopId: workshop.id || workshop._id,
+          workshopId: wId,
           formData: parseResult.data
         }),
       });
